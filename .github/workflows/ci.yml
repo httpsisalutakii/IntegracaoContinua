@@ -79,3 +79,15 @@ jobs:
           # Usa as tags geradas pelo 'metadata-action'
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  deploy-to-local:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: test-and-build
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout do Código
+        uses: actions/checkout@v4
+
+      - name: Fazer Deploy com Docker Compose
+        run: docker compose up -d --build
