@@ -80,7 +80,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-deploy-to-local:
+  deploy-to-local:
     # Este job SÓ RODA se for um push na 'main'
     # CORREÇÃO: Ele precisa que o Job 1 (test-and-build) termine com sucesso
     needs: test-and-build
